@@ -46,6 +46,7 @@ async function run() {
         res.send(result);
     })
 
+   
     app.post('/touristSpots' , async (req , res) =>{
 
         const touristSpot=req.body;

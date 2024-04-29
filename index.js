@@ -53,7 +53,8 @@ async function run() {
         const result= await touristSpotCollection.insertOne(touristSpot);
         res.send(result);
     })
-
+    
+    // Updating the tourist spot
     app.put('/touristSpots/:id' , async (req , res) =>{
         const id = req.params.id;
         const updatedSpot=req.body;

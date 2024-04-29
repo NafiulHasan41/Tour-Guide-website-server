@@ -53,6 +53,38 @@ async function run() {
         const result= await touristSpotCollection.insertOne(touristSpot);
         res.send(result);
     })
+
+    app.put('/touristSpots/:id' , async (req , res) =>{
+        const id = req.params.id;
+        const updatedSpot=req.body;
+        const filter = {_id: new ObjectId(id)};
+        const options = {upsert: true};
+        const spot = {
+            $set:{
+                imageURL: updatedSpot.imageURL,
+                touristSpotName: updatedSpot.touristSpotName,
+                location: updatedSpot.location,
+                description: updatedSpot.description,
+                average_cost: updatedSpot.average_cost,
+                seasonality: updatedSpot.seasonality,
+                travel_time: updatedSpot.travel_time,
+                totalVisitorPerYear: updatedSpot.totalVisitorPerYear,
+                country: updatedSpot.country,
+            }
+        }
+
+        const result = await touristSpotCollection.updateOne(filter , spot , options);
+        res.send(result);
+    })
+
+  
+
+    app.delete('/touristSpots/:id' , async (req , res) =>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)};
+        const result = await touristSpotCollection.deleteOne(query);
+        res.send(result);
+    })
   
 
 
